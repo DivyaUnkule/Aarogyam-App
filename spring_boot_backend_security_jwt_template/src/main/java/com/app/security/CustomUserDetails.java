@@ -6,25 +6,26 @@ import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
+import com.app.entities.Login;
 import com.app.entities.User;
 
 import lombok.AllArgsConstructor;
 
-
 public class CustomUserDetails implements UserDetails {
-	private User user;
+	private Login user;
 	
-	public CustomUserDetails(User user) {
+	public CustomUserDetails(Login user) {
 		super();
 		this.user = user;
 	}
 		
-	public User getUser() {
+	public Login getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Login user) {
 		this.user = user;
 	}
 
@@ -34,7 +35,7 @@ public class CustomUserDetails implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities(){
 		var roleList = user.getUserRoles()
 						.stream()
-						.map(role -> new SimpleGrantedAuthority(role.getRoleName(role).name()))//need to ask
+						.map(role -> new SimpleGrantedAuthority(role.getRoleName().name()))//need to ask
 						.collect(Collectors.toList());
 		return roleList;
 	}

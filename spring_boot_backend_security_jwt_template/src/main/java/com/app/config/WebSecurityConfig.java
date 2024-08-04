@@ -27,12 +27,6 @@ public class WebSecurityConfig {
 	@Autowired
 	private JWTRequestFilter filter;
 
-	// configure BCryptPassword encoder bean
-	@Bean
-	public PasswordEncoder encoder() {
-		return new BCryptPasswordEncoder();
-	}
-
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable().

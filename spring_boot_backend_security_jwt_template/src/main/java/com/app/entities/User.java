@@ -24,9 +24,9 @@ public class User extends BaseEntity {
 	private String email;
 	@Column(length = 20, nullable = false)
 	private String password;
-	@Enumerated(EnumType.STRING)
-	@Column(name="user_roles",length = 20)
-	private Set<Role> userRoles = new HashSet<Role>();
+//	@Enumerated(EnumType.STRING)
+//	@Column(name="user_roles",length = 20)
+//	private Set<Role> userRoles = new HashSet<Role>();
 	@Column
 	private String firstName;
 	@Column
@@ -60,13 +60,13 @@ public class User extends BaseEntity {
 		this.password = password;
 	}
 
-	public Set<Role> getUserRoles() {
-		return userRoles;
-	}
-
-	public void setUserRoles(Set<Role> role) {
-		this.userRoles = role;
-	}
+//	public Set<Role> getUserRoles() {
+//		return userRoles;
+//	}
+//
+//	public void setUserRoles(Set<Role> role) {
+//		this.userRoles = role;
+//	}
 
 	public String getFirstName() {
 		return firstName;
@@ -130,7 +130,7 @@ public class User extends BaseEntity {
 		super(id, createdAt, updatedAt);
 		this.email = email;
 		this.password = password;
-		this.userRoles = role;
+//		this.userRoles = role;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.profilePicPath = profilePicPath;
@@ -146,7 +146,7 @@ public class User extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "User [email=" + email + ", password=" + password + ", role=" + userRoles + ", firstName=" + firstName
+		return "User [email=" + email + ", password=" + password + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", profilePicPath=" + profilePicPath + ", phoneNo=" + phoneNo + ", status="
 				+ status + ", address=" + address + ", gender=" + gender + "]";
 	}
