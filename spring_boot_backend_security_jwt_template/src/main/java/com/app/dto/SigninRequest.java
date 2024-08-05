@@ -1,13 +1,22 @@
 package com.app.dto;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Email;
+
+import javax.validation.constraints.NotEmpty;
+
+
+import org.hibernate.validator.constraints.Length;
 
 
 
-public class AuthRequest {
-	@NotBlank(message = "Email can't be blank or null")
+
+public class SigninRequest {
+	
+	@NotEmpty(message = "Email can't be blank")
+	@Email(message = "Invalid email format")
 	private String email;
-	@NotBlank(message = "password can't be blank or null")
+	@NotEmpty
+	@Length(min = 3,max=20,message = "Invalid password length")
 	private String password;
 	public String getEmail() {
 		return email;
@@ -25,7 +34,4 @@ public class AuthRequest {
 	public String toString() {
 		return "AuthRequest [email=" + email + ", password=" + password + "]";
 	}
-	
-	
 }
-

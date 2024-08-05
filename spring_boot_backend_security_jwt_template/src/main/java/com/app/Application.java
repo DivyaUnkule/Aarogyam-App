@@ -15,18 +15,16 @@ public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
-
-	// configure BCryptPassword encoder bean
 	@Bean
 	public PasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();
 	}
 
+
 	@Bean // equivalent to <bean id ..../> in xml file
 	public ModelMapper mapper() {
-		ModelMapper modelMapper = new ModelMapper();
-		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT)
-				.setPropertyCondition(Conditions.isNotNull());
+		ModelMapper modelMapper = new ModelMapper();		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT)
+	.setPropertyCondition(Conditions.isNotNull());
 		return modelMapper;
 	}
 

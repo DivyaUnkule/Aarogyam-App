@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.app.entities.Login;
-import com.app.entities.User;
+import com.app.entities.UserEntity;
 
 import lombok.AllArgsConstructor;
 
@@ -35,11 +35,11 @@ public class CustomUserDetails implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities(){
 		var roleList = user.getUserRoles()
 						.stream()
-						.map(role -> new SimpleGrantedAuthority(role.getRoleName().name()))//need to ask
+						.map(role -> new SimpleGrantedAuthority(role.getRoleName().name()))
 						.collect(Collectors.toList());
 		return roleList;
 	}
-	
+	 
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub

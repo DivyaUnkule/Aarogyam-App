@@ -1,4 +1,4 @@
-package com.app.globalexceptionhandler;
+package com.app.custom_exception_handler;
 
 import java.util.Map;
 import java.util.stream.Collectors;

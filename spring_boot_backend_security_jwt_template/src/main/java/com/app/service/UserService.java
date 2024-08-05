@@ -2,29 +2,23 @@ package com.app.service;
 
 import javax.transaction.Transactional;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-
-import com.app.dto.RegularUserDTO;
-import com.app.dto.UserDTO;
+import com.app.dto.ApiResponse;
+import com.app.dto.Signup;
 import com.app.dto.UserRegResponse;
-import com.app.dto.UserResponseDTO;
-import com.app.dto.WeightGainUserDTO;
-import com.app.dto.WeightLossUserDTO;
 
 import io.swagger.v3.oas.annotations.servers.Server;
 
 public interface UserService {
 
-	UserRegResponse registerUser(UserDTO user);
-	
-	UserResponseDTO registerRegularUser (RegularUserDTO regularUser);
+	UserRegResponse userRegistration(Signup user);
 
+	UserDetails loadUserByUsername(String email) throws UsernameNotFoundException;
 	
-	UserResponseDTO registerWeightGainUser (WeightGainUserDTO weightGainUser);
-
-	UserResponseDTO registerWeightLossUser ( WeightLossUserDTO weightLossUser);
 	
-	<T> T temporaryValidateUser(String email) throws Exception;
+	
 
 }

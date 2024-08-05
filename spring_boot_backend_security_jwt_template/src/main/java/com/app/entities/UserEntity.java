@@ -1,25 +1,17 @@
 package com.app.entities;
 
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
-
-
-
 import com.app.enums.Gender;
-import com.app.enums.Role;
 import com.app.enums.Status;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity {
+public class UserEntity extends BaseEntity {
 	@Column(length = 20, unique = true)
 	private String email;
 	@Column(length = 20, nullable = false)
@@ -67,6 +59,15 @@ public class User extends BaseEntity {
 //	public void setUserRoles(Set<Role> role) {
 //		this.userRoles = role;
 //	}
+
+	
+
+	@PrePersist
+	protected void onCreate() {
+		if (status == null) {
+			status = Status.INACTIVE;
+		}
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -124,38 +125,12 @@ public class User extends BaseEntity {
 		this.gender = gender;
 	}
 
-	public User(Long id, LocalDateTime createdAt, LocalDateTime updatedAt, String email, String password, Set<Role> role,
-			String firstName, String lastName, String profilePicPath, String phoneNo, Status status, String address,
-			Gender gender) {
-		super(id, createdAt, updatedAt);
-		this.email = email;
-		this.password = password;
-//		this.userRoles = role;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.profilePicPath = profilePicPath;
-		this.phoneNo = phoneNo;
-		this.status = status;
-		this.address = address;
-		this.gender = gender;
-	}
-
-	public User(Long id, LocalDateTime createdAt, LocalDateTime updatedAt) {
-		super(id, createdAt, updatedAt);
-	}
-
 	@Override
 	public String toString() {
-		return "User [email=" + email + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", profilePicPath=" + profilePicPath + ", phoneNo=" + phoneNo + ", status="
-				+ status + ", address=" + address + ", gender=" + gender + "]";
+		return "UserEntity [email=" + email + ", password=" + password + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", profilePicPath=" + profilePicPath + ", phoneNo=" + phoneNo + ", status=" + status
+				+ ", address=" + address + ", gender=" + gender + "]";
 	}
-
-	@PrePersist
-	protected void onCreate() {
-		if (status == null) {
-			status = Status.INACTIVE;
-		}
-	}
+	
 
 }

@@ -10,14 +10,14 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>spring_boot_backend_security_jwt_template</artifactId>
+	<artifactId>AarogyamApp</artifactId>
 	<version>0.0.1</version>
-	<name>spring_boot_backend_security_jwt_template</name>
-	<description>Template Project for Spring Boot based Backend, swagger,model mapper, JWT , security </description>
+	<name>AarogyamApp</name>
+	<description>Spring Boot based Backend, swagger,model mapper, JWT , security </description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
-	<dependencies> 
+	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -106,16 +106,13 @@
 			<version>0.11.5</version>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-logging</artifactId>
-</dependency>
 		
 		<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-mail</artifactId>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.26</version> <!-- Use the latest version available -->
+    <scope>provided</scope>
 </dependency>
-		
 
 	</dependencies>
 

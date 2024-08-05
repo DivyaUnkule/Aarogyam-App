@@ -34,14 +34,15 @@ public class RoleEntity extends BaseEntity {
 		this.roleName = roleName;
 	}
 
-	public RoleEntity(Long id, LocalDateTime createdAt, LocalDateTime updatedAt, Role roleName) {
-		super(id, createdAt, updatedAt);
+	public RoleEntity(Role roleName) {
+		super();
 		this.roleName = roleName;
 	}
 
-	public RoleEntity(Long id, LocalDateTime createdAt, LocalDateTime updatedAt) {
-		super(id, createdAt, updatedAt);
+	public RoleEntity() {
+		super();
 	}
+
 	
 	
 	
