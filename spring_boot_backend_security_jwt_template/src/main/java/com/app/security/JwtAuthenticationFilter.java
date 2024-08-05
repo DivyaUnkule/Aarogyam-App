@@ -13,33 +13,42 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Component // a spring bean that can be injected in other spring beans , as dependency
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-	// will be used for token verification
-	// dependency -  JWT utils
-	@Autowired
-	private JwtUtils utils;
+    private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
-	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-			throws ServletException, IOException {
-		// check authorization header from incoming request
-		String authHeader = request.getHeader("Authorization");
-		if (authHeader != null && authHeader.startsWith("Bearer ")) {
-			// => request header contains JWT , so extract it.
-			String jwt = authHeader.substring(7);
-			Authentication authentication = utils.populateAuthenticationTokenFromJWT(jwt);
-			/*
-			 * 	save this Authentication object , 
-			 * containing - email , user id n granted authorities , 
-			 * under spring security context ,  so that subsequent filters will NOT
-			 * retry the authentication again (isAuthenticated is already set to true)		
-			 */
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-			System.out.println("saved auth token in sec ctx");
-		}
-		filterChain.doFilter(request, response);// to continue with remaining chain of spring sec filters
+    @Autowired
+    private JwtUtils utils;
 
-	}
-
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
+        try {
+            // check authorization header from incoming request
+            String authHeader = request.getHeader("Authorization");
+            if (authHeader != null && authHeader.startsWith("Bearer ")) {
+                // => request header contains JWT , so extract it.
+                String jwt = authHeader.substring(7);
+                Authentication authentication = utils.populateAuthenticationTokenFromJWT(jwt);
+                if (authentication != null) {
+                    /*
+                     *  save this Authentication object , 
+                     * containing - email , user id n granted authorities , 
+                     * under spring security context , so that subsequent filters will NOT
+                     * retry the authentication again (isAuthenticated is already set to true)		
+                     */
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                    logger.info("Saved auth token in security context");
+                } else {
+                    logger.warn("Authentication is null, invalid token.");
+                }
+            }
+        } catch (Exception e) {
+            logger.error("Could not set user authentication in security context", e);
+        }
+        filterChain.doFilter(request, response); // continue with remaining chain of spring sec filters
+    }
 }

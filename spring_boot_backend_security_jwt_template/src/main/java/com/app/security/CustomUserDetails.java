@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.app.entities.Login;
-import com.app.entities.UserEntity;
+import com.app.entities.Login;
 
 import lombok.AllArgsConstructor;
 

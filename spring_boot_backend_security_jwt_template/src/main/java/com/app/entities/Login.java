@@ -12,22 +12,23 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+
 import com.app.enums.Gender;
 import com.app.enums.Status;
 
 @Entity
-@Table(name = "login")
+@Table(name = "users")
 public class Login extends BaseEntity {
-	@Column(length = 20, unique = true)
+	@Email(message = "Invalid Email!!!")
+	@Column(unique = true)
 	private String email;
-	@Column(length = 20, nullable = false)
+	@Column(length = 350,nullable = false)
 	private String password;
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<RoleEntity> userRoles = new HashSet<>();
-
-
-	@Column
+    @Column
 	private String firstName;
 	@Column
 	private String lastName;
