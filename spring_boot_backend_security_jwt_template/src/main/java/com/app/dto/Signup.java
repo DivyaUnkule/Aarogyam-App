@@ -14,6 +14,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.app.entities.RoleEntity;
 import com.app.enums.Gender;
 import com.app.enums.Role;
@@ -35,7 +37,7 @@ public class Signup {
 	@Column
 	private String lastName;
 	@Column(nullable = false)
-	private String profilePicPath;
+	private MultipartFile profilePicPath;
 	@Column(length = 14, unique = true)
 	private String phoneNo;
 	@Enumerated(EnumType.STRING)
@@ -50,7 +52,7 @@ public class Signup {
 	@NotEmpty(message = "at least 1 role should be chosen")
 	private Set<Role> roles = new HashSet<>();
 	//private String adminSecretKey;
-	public Signup(Long userId, String email, String password, String firstName, String lastName, String profilePicPath,
+	public Signup(Long userId, String email, String password, String firstName, String lastName, MultipartFile profilePicPath,
 			String phoneNo, Status status, String address, Gender gender,
 			@NotEmpty(message = "at least 1 role should be chosen") Set<Role> roles) {
 		super();
@@ -100,10 +102,10 @@ public class Signup {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getProfilePicPath() {
+	public MultipartFile getProfilePicPath() {
 		return profilePicPath;
 	}
-	public void setProfilePicPath(String profilePicPath) {
+	public void setProfilePicPath(MultipartFile profilePicPath) {
 		this.profilePicPath = profilePicPath;
 	}
 	public String getPhoneNo() {

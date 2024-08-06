@@ -1,5 +1,7 @@
 package com.app.service;
 
+import java.io.IOException;
+
 import javax.transaction.Transactional;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +16,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
 
 public interface UserService {
 
-	UserRegResponse userRegistration(Signup user);
+	UserRegResponse userRegistration(Signup user) throws IOException;
 
 	UserDetails loadUserByUsername(String email) throws UsernameNotFoundException;
 	

@@ -1,5 +1,7 @@
 package com.app.controller;
 
+import java.io.IOException;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +42,7 @@ public class UserSignInSignupController {
 	 * 
 	 */
 	@PostMapping("/signup")
-	public ResponseEntity<?> userSignup(@RequestBody @Valid Signup dto) {
+	public ResponseEntity<?> userSignup(Signup dto) throws IOException {
 		System.out.println("in sign up " + dto);
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.userRegistration(dto));
 	}
