@@ -11,6 +11,6 @@ import com.app.enums.Role;
 @Repository
 public interface RoleEntityRepo extends JpaRepository<RoleEntity, Long> {
 	Optional<RoleEntity> findByRoleName(Role role);
-	Set<RoleEntity> findByRoleNameIn(Set<Role> roles);
+    Set<RoleEntity> findByRoleNameIn(Set<Role> roles);
 
 }

@@ -20,13 +20,13 @@ import com.app.dto.SigninResponse;
 import com.app.dto.Signup;
 import com.app.security.CustomUserDetails;
 import com.app.security.JwtUtils;
-import com.app.service.UserService;
+import com.app.service.IUserService;
 
 @RestController
 @RequestMapping("/users")
 public class UserSignInSignupController {
 	@Autowired
-	private UserService userService;
+	private IUserService userService;
 
 	@Autowired
 	private JwtUtils jwtUtils;

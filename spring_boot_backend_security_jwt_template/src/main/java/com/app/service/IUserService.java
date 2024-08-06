@@ -14,7 +14,7 @@ import com.app.dto.UserRegResponse;
 
 import io.swagger.v3.oas.annotations.servers.Server;
 
-public interface UserService {
+public interface IUserService {
 
 	UserRegResponse userRegistration(Signup user) throws IOException;
 

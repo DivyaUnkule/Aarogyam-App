@@ -24,9 +24,10 @@ import com.app.repository.LoginRepo;
 import com.app.repository.RoleEntityRepo;
 import com.app.security.CustomUserDetails;
 
+
 @Service
 @Transactional
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
 	//dep : dao layer i/f
 		@Autowired
 		private LoginRepo userDao;
@@ -40,8 +41,10 @@ public class UserServiceImpl implements UserService {
 		private RoleEntityRepo roleRepo;
 		@Autowired
 		private LoginRepo loginRepo;
-		@Value("${file.profile.upload.location}")
-		private String profilePictureFolderPath;
+//		@Value("${file.profile.upload.location}")
+//		private String profilePictureFolderPath;
+		
+		
 		
 		public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 			Login user = userDao.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Invalid Email ID !!"));
@@ -56,20 +59,23 @@ public class UserServiceImpl implements UserService {
 		userEntity.setUserRoles(roleRepo.findByRoleNameIn(reqDTO.getRoles()));
 		// 3. encode pwd
 		userEntity.setPassword(encoder.encode(reqDTO.getPassword()));
-		// 4 : Save user details
 		
-		Clock clock = Clock.systemDefaultZone();
-		long milliSeconds = clock.millis();
-		MultipartFile profilePictureFile = reqDTO.getProfilePicPath();
-		String completePath = profilePictureFolderPath + File.separator + milliSeconds
-				+ profilePictureFile.getOriginalFilename();
-		Files.copy(profilePictureFile.getInputStream(), Paths.get(completePath), StandardCopyOption.REPLACE_EXISTING);
+//		Clock clock = Clock.systemDefaultZone();
+//		long milliSeconds = clock.millis();
+//		MultipartFile profilePictureFile = reqDTO.getProfilePicPath();
+//		String completePath = profilePictureFolderPath + File.separator + milliSeconds
+//				+ profilePictureFile.getOriginalFilename();
+//		Files.copy(profilePictureFile.getInputStream(), Paths.get(completePath), StandardCopyOption.REPLACE_EXISTING);
+//
+//		userEntity.setProfilePicPath(completePath);
+//		userEntity.setUserRoles(roleRepo.findByRoleNameIn(reqDTO.getRoles()));
+//		userEntity.setPassword(encoder.encode(reqDTO.getPassword()));
+		
 
-		userEntity.setProfilePicPath(completePath);
-		userEntity.setUserRoles(roleRepo.findByRoleNameIn(reqDTO.getRoles()));
-		userEntity.setPassword(encoder.encode(reqDTO.getPassword()));
-
+		// 4 : Save user details
 		Login persistentUser = loginRepo.save(userEntity);
+		
+		
 		
 		return new UserRegResponse("User registered successfully with ID " + persistentUser.getId());
 	}
