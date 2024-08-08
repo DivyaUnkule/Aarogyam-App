@@ -1,4 +1,4 @@
-package com.app.service;
+package com.app.services;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,8 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.app.dto.Signup;
 import com.app.dto.UserRegResponse;
 import com.app.entities.Login;
-import com.app.repository.LoginRepo;
-import com.app.repository.RoleEntityRepo;
+import com.app.repositories.LoginRepo;
+import com.app.repositories.RoleEntityRepo;
 import com.app.security.CustomUserDetails;
 
 
