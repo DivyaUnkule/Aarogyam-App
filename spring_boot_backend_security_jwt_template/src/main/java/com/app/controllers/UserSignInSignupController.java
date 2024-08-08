@@ -67,5 +67,7 @@ public class UserSignInSignupController {
 		SigninResponse resp = new SigninResponse(jwtUtils.generateJwtToken(verifiedToken), "Successful Auth!!!!");
 		return ResponseEntity.status(HttpStatus.CREATED).body(resp);
 	}
+	
+	
 
 }

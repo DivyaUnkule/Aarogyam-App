@@ -16,5 +16,9 @@ public interface IExerciseYogaService {
 	Optional<ExerciseYoga> getExerciseYogaById(Long id);
 	void deleteExerciseYoga(Long id);
 	ExerciseYoga updateExerciseYoga(ExerciseYogaDTO exerciseyogadto);
+	List<ExerciseYoga> getAllWeightLossUserExercises();
+	List<ExerciseYoga> getAllWeightGainUserExercises();
+	List<ExerciseYoga> getAllRegularUserExercises();
+	
 	
 }

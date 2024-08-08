@@ -50,6 +50,7 @@ public class SecurityConfig {
         .antMatchers("/users/weightlossuser/**").permitAll()
         .antMatchers("/users/weightgainuser/**").permitAll()
         .antMatchers("/users/regularuser/**").permitAll()
+        .antMatchers("/users/user/**").permitAll()
         .anyRequest().authenticated()
 		.and()
 		//to tell spring sec : not to use HttpSession to store user's auth details

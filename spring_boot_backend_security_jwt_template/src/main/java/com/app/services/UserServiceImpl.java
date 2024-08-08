@@ -41,9 +41,8 @@ public class UserServiceImpl implements IUserService {
 		private RoleEntityRepo roleRepo;
 		@Autowired
 		private LoginRepo loginRepo;
-//		@Value("${file.profile.upload.location}")
-//		private String profilePictureFolderPath;
-		
+		@Value("${file.profile.upload.location}")
+		private String profilePictureFolderPath;
 		
 		
 		public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -60,16 +59,17 @@ public class UserServiceImpl implements IUserService {
 		// 3. encode pwd
 		userEntity.setPassword(encoder.encode(reqDTO.getPassword()));
 		
-//		Clock clock = Clock.systemDefaultZone();
-//		long milliSeconds = clock.millis();
-//		MultipartFile profilePictureFile = reqDTO.getProfilePicPath();
-//		String completePath = profilePictureFolderPath + File.separator + milliSeconds
-//				+ profilePictureFile.getOriginalFilename();
-//		Files.copy(profilePictureFile.getInputStream(), Paths.get(completePath), StandardCopyOption.REPLACE_EXISTING);
-//
-//		userEntity.setProfilePicPath(completePath);
-//		userEntity.setUserRoles(roleRepo.findByRoleNameIn(reqDTO.getRoles()));
-//		userEntity.setPassword(encoder.encode(reqDTO.getPassword()));
+	Clock clock = Clock.systemDefaultZone();
+	long milliSeconds = clock.millis();
+         MultipartFile profilePictureFile = reqDTO.getProfilePicPath();
+         String completePath = profilePictureFolderPath + File.separator + milliSeconds
+				+ profilePictureFile.getOriginalFilename();
+			Files.copy(profilePictureFile.getInputStream(), Paths.get(completePath),
+					StandardCopyOption.REPLACE_EXISTING);
+
+		userEntity.setProfilePicPath(completePath);
+		userEntity.setUserRoles(roleRepo.findByRoleNameIn(reqDTO.getRoles()));
+		userEntity.setPassword(encoder.encode(reqDTO.getPassword()));
 		
 
 		// 4 : Save user details
